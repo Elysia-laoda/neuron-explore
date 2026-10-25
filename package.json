@@ -1,7 +1,7 @@
 {
   "name": "neuron-explore",
-  "version": "0.1.0",
-  "description": "神经元探索：多 AI 并行思考与注入（单思考注入 / agent 注入 / 融合式注入）",
+  "version": "0.2.0",
+  "description": "神经元探索：多 AI 并行思考与互相注入（单思考注入 / agent 注入 / 融合式注入）。DSH plugin + CLI.",
   "license": "MIT",
   "type": "module",
   "main": "lib/index.js",
@@ -10,6 +10,13 @@
     "./engine": "./lib/engine.mjs",
     "./http": "./lib/ask-http.mjs"
   },
+  "files": [
+    "lib",
+    "cli.mjs",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
   "engines": {
     "node": ">=20"
   },
@@ -19,8 +26,10 @@
       "patch": "./cordis.patch.yml"
     }
   },
+  "dependencies": {
+    "schemastery": "^3.18.0"
+  },
   "scripts": {
-    "test": "node --test tests/*.test.mjs",
     "check": "node --check lib/index.js"
   }
 }
