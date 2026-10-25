@@ -1,0 +1,18 @@
+# 依赖
+node_modules/
+pnpm-lock.yaml
+
+# 本地实验产物（不发布）
+_*
+*.jsonl
+*.log
+
+# 凭据与本地配置
+.env
+.env.*
+*.key
+credentials*.yaml
+
+# 系统
+.DS_Store
+Thumbs.db

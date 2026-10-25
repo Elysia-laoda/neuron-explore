@@ -1,0 +1,23 @@
+# neuron-explore — profile patch layer（默认关闭）
+#
+# 通用版不预设任何 AI：三个字段都为空时插件不工作，
+# 调工具会直接返回 NOT_CONFIGURED 并提示去配置。
+- insert:
+    - id: neuron-explore
+      name: 'neuron-explore'
+      config:
+        enabled: false
+        mode: fuse            # single | agent | fuse
+        workers: 3
+        rounds: 2
+        mid: 1800
+        tail: 900
+        budget: 2500
+        # —— 必填：至少配置一个 AI ——
+        baseUrl: ''           # OpenAI 兼容端点，例如 https://xxx/compatible-mode/v1
+        model: ''             # 例如 deepseek-v4.1-flash
+        apiKeyEnv: ''         # 存放密钥的环境变量名，例如 NEURON_KEY
+        # —— 可选 ——
+        judgeModel: ''        # 空 = 与 model 相同
+        judgeBaseUrl: ''      # 空 = 与 baseUrl 相同
+        judgeApiKeyEnv: ''    # 空 = 与 apiKeyEnv 相同
