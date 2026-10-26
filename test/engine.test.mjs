@@ -56,3 +56,12 @@ test('fuse 必须把获胜轨迹作为 answer 返回（不能只有打分日志�
   assert.equal(typeof r.answer, 'string');
   assert.ok(r.answer.length > 0, 'fuse 的 answer 不能为空');
 });
+
+
+test('多工作 AI：线程按顺序轮流使用不同的 ask', async () => {
+  const used = [];
+  const mk = (name) => async () => { used.push(name); return { text: name + '的思考' }; };
+  const eng = makeEngine({ ask: mk('X'), asks: [mk('A'), mk('B')], judge: judgeSaying(0) });
+  await eng.agent({ prompt: 'q', n: 4, rounds: 1 });
+  assert.deepEqual(used.slice(0, 4), ['A', 'B', 'A', 'B']);
+});
