@@ -49,3 +49,10 @@ test('不限模式下的卡住兜底依然有效（不会真的无限跑）', as
   const r = await eng.agent({ prompt: 'q', n: 2, rounds: 0, maxRounds: 0, maxMinutes: 0, noProgress: 2 });
   assert.equal(r.stopReason, 'stalled');
 });
+
+test('fuse 必须把获胜轨迹作为 answer 返回（不能只有打分日志）', async () => {
+  const eng = makeEngine({ ask: askThat('思考产出'), judge: judgeSaying(1) });
+  const r = await eng.fuse({ prompt: 'q', n: 2, rounds: 1, mid: 100, tail: 50 });
+  assert.equal(typeof r.answer, 'string');
+  assert.ok(r.answer.length > 0, 'fuse 的 answer 不能为空');
+});
