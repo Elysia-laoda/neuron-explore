@@ -36,3 +36,16 @@ test('fuse：同样按评审宣告收敛', async () => {
   assert.equal(r.rounds, 2);
   assert.equal(r.log[0].done.length, 2);
 });
+
+test('不限模式：maxRounds=0 且 maxMinutes=0，只有语义信号能结束', async () => {
+  const eng = makeEngine({ ask: askThat('内容'), judge: judgeSaying(1) });
+  const r = await eng.agent({ prompt: 'q', n: 2, rounds: 0, maxRounds: 0, maxMinutes: 0 });
+  assert.equal(r.stopReason, 'model-done');
+  assert.equal(r.rounds, 2);
+});
+
+test('不限模式下的卡住兜底依然有效（不会真的无限跑）', async () => {
+  const eng = makeEngine({ ask: askThat('固定不变'), judge: judgeSaying(0) });
+  const r = await eng.agent({ prompt: 'q', n: 2, rounds: 0, maxRounds: 0, maxMinutes: 0, noProgress: 2 });
+  assert.equal(r.stopReason, 'stalled');
+});
