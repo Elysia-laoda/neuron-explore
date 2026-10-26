@@ -1,7 +1,7 @@
 {
   "name": "neuron-explore",
-  "version": "0.4.0",
-  "description": "神经元探索：多 AI 并行思考与互相注入（单思考注入 / agent 注入 / 融合式注入）。DSH plugin + CLI.",
+  "version": "1.0.0",
+  "description": "神经元探索：多路 AI 并行思考。三种形态——通用 CLI/库、三模式引擎（single/agent/fuse）、DSH 插件（注册成模型 provider，选中即替代单思考）。",
   "license": "MIT",
   "type": "module",
   "main": "lib/index.js",
@@ -17,6 +17,7 @@
     "cli.mjs",
     "cordis.patch.yml",
     "README.md",
+    "HANDOVER.md",
     "LICENSE"
   ],
   "engines": {
@@ -40,5 +41,14 @@
   "scripts": {
     "test": "node --test test/loop.test.mjs test/engine.test.mjs",
     "check": "node --check lib/index.js"
-  }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "llm",
+    "multi-agent",
+    "parallel-thinking",
+    "推理",
+    "多路思考"
+  ]
 }
