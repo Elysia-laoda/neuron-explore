@@ -7,7 +7,7 @@
       name: 'neuron-explore'
       config:
         enabled: false
-        mode: fuse            # single | agent | fuse
+        mode: agent            # single | agent | fuse
         workers: 3
         rounds: 2
         mid: 1800
