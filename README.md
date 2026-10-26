@@ -68,3 +68,20 @@ DSH 的单模型 agent 不数轮数，它在两种**语义信号**下结束这�
 | 调试 | \`rounds > 0\`，只跑固定轮数 | \`fixed-rounds\` |
 
 默认 \`rounds = 0\`：跑到收敛为止。策略实现在 \`lib/loop.mjs\`，两种模式共用，\`node --test\` 可离线验证全部判定。
+
+## 零配置（默认）
+
+插件直接走宿主 LLM 服务：读取 DSH 里已配置的默认模型（\`agentDefaultModel\`）并调用
+\`ctx.get('llm').stream(...)\`，**不需要填端点、模型或密钥**。只有想强制指定别的模型时，
+才在设置里填 \`baseUrl\` / \`model\` / \`apiKeyEnv\`（三项都填才会覆盖宿主模型）。
+
+实测（Win11-Lab 虚机、宿主模型 deepseek-flash）：
+
+| 项目 | 结果 |
+|---|---|
+| 配置 | 零配置，直接可用 |
+| 收敛 | \`stopReason=model-done\`，第 3 轮自行停止 |
+| 耗时 | 173 秒 |
+| 答案 | 44（36+8 分类，附防漏说明） |
+
+\`POST /neuron-explore/run\` 可直接试跑：\`{"prompt":"...","mode":"agent","n":3,"rounds":0}\`。
